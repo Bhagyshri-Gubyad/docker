@@ -1,0 +1,16 @@
+from ubuntu
+run apt update -y
+run apt install nginx -y
+workdir /var/www/html
+run touch index.html
+run echo "from ubuntu dkf" > index.html
+cmd ["nginx","-g","daemon off ;"]
+
+
+
+
+for running this file
+docker build –f cng –t cngdkfimg .
+docker images
+now create container form that
+docker container run –d –p80:80 –name cngc  cngdkfimg
