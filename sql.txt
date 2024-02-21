@@ -1,0 +1,5 @@
+Docker run –d –p80:80 --name ngc  -v /home/ec2-user/dkf:/usr/share/nginx/html  nginx 
+
+named volume example
+Docker volume create volname
+docker run -d --name sqc -v dbvol:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Pass@123 -e MYSQL_DATABASE=PAGAL mysql
