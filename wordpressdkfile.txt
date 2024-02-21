@@ -1,0 +1,10 @@
+FROM wordpress
+ENV WORDPRESS_DB_HOST sqlcontainername        
+ENV WORDPRESS_DB_USER root
+ENV WORDPRESS_DB_PASSWORD Pass@123
+ENV WORDPRESS_DB_NAME facebook
+EXPOSE 80
+CMD ["apache2-foreground"]
+
+Dk build –f wpdkf –t wpdkfimg .
+Dk run –d –p80:80 --name wpc wpdkfimg
