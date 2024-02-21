@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - nginx_data:/usr/share/nginx/html
+      - ./nginx-config:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    networks:
+      - public
+    depends_on:
+      - php-fpm
+      - mysql
+
+  php-fpm:
+    image: php:7.4-fpm
+    ports:
+     - 9000
+    volumes:
+      - php_data:/var/www/html
+    networks:
+      - private
+      - public
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - private
+    ports:
+     - 3306
+networks:
+  public:
+  private:
+
+volumes:
+  nginx_data:
+  php_data:
+  mysql_data:
