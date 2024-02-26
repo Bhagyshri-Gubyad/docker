@@ -1,0 +1,46 @@
+sudo yum install docker -y
+sudo service docker start
+sudo service docker status
+sudo systemctl enable docker.service
+docker pull nginx
+docker images
+
+docker run -d --name mynginx -p 80:80 nginx
+
+docker commit mynginx myupdatednginx
+docker images
+docker tag myupdatednginx devopsbaby/freewalanginx:v1.0
+docker login
+docker push devopsbaby/freewalanginx:v1.0
+docker exec -it containerID /bin/bash
+
+aws configure
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 345398132492.dkr.ecr.us-east-1.amazonaws.com
+ docker image ls
+docker tag nginx:latest 345398132492.dkr.ecr.us-east-1.amazonaws.com/myupdatednginx:latest
+docker image ls
+docker push 345398132492.dkr.ecr.us-east-1.amazonaws.com/myupdatednginx
+docker pull 345398132492.dkr.ecr.us-east-1.amazonaws.com/myupdatednginx
+
+docker network create mynetwork
+docker network ls
+docker container prune
+docker container ls -a
+
+docker network inspect mynetwork
+docker container inspect wordpress
+docker container logs wordpress
+docker logs mysqlcontainer
+
+docker network rm mynetwork
+docker network ls
+ docker network create --subnet=192.168.0.0/16 mycustomenetwork
+docker network ls
+docker network inspect mycustomenetwork
+docker run -d -it --name mubuntu --network mycustomenetwork --ip 192.168.0.7 ubuntu /bin/bash
+ docker exec -it f7bc47b6ba18 /bin/bash
+curl http://localhost/ravi.html
+
+docker build .
+docker image ls
+docker build -t myimg .
